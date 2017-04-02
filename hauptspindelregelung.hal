@@ -41,21 +41,22 @@ setp FCLL.max 1
 net PIDout => FCLL.in
 net FC1 <= FCLL.out
 
-setp FCLS.gain 0.3
+setp FCLS.gain 1
 net FC1 => FCLS.in
 net FC2 <= FCLS.out
 
 setp interpolation-tief.in1 0
-setp interpolation-tief.in2 -500
+setp interpolation-tief.in2 3.39244044044
+
 net FC2 => interpolation-tief.select
 net FC3 <= interpolation-tief.out
 
-setp FCHS.gain 0.1
+setp FCHS.gain 0.001
 net PIDout => FCHS.in
 net FC4 <= FCHS.out
 
 setp interpolation-hoch.in1 0
-setp interpolation-hoch.in2 1500
+setp interpolation-hoch.in2 7.55955955955956
 net FC4 => interpolation-hoch.select
 net FC5 <= interpolation-hoch.out
 
