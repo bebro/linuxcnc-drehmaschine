@@ -18,7 +18,7 @@ addf FCSum servo-thread
 loadrt abs names=nsollabs
 addf nsollabs servo-thread
 loadrt comp names=spindle-on
-addf spindle-on
+addf spindle-on servo-thread
 
 # Spindel-Ein-Signal
 #net spindle-enable <= motion.spindle-on
