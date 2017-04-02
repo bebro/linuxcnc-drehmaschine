@@ -1,0 +1,9 @@
+loadrt near names=sas
+addf near.0 servo-thread
+
+# Spindle-At-Speed
+setp sas.scale 1.05
+setp sas.difference 50
+net spindle-cmd => sas.in1
+net nist => sas.in2
+net spindle-at-speed <= sas.out => motion.spindle-at-speed
