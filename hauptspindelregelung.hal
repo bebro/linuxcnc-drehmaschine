@@ -20,7 +20,7 @@ addf FCSum servo-thread
 net spindle-enable <= motion.spindle-on
 
 # Rampenerzeugung aus Sollwertsprüngen
-setp spindle-ramp.maxv 10	# Einheit pro Sekunde
+setp spindle-ramp.maxv 100	# Einheit pro Sekunde
 net spindle-cmd <= motion.spindle-speed-out => spindle-ramp.in
 net nsoll <= spindle-ramp.out
 
@@ -36,27 +36,27 @@ net PIDout <= SpindelPID.output
 
 # FU-Kennlinie einbauen
 # Tiefer Bereich
-setp FCLL.min 0
+setp FCLL.min -1
 setp FCLL.max 1
 net PIDout => FCLL.in
 net FC1 <= FCLL.out
 
-setp FCLS.gain 1
+setp FCLS.gain 0.320512821
 net FC1 => FCLS.in
 net FC2 <= FCLS.out
 
 setp interpolation-tief.in2 0
-setp interpolation-tief.in1 3.39244044044
+setp interpolation-tief.in1 -488.30612244898
 
 net FC2 => interpolation-tief.select
 net FC3 <= interpolation-tief.out
 
-setp FCHS.gain 0.001
+setp FCHS.gain 0.105374078
 net PIDout => FCHS.in
 net FC4 <= FCHS.out
 
 setp interpolation-hoch.in2 0
-setp interpolation-hoch.in1 7.55955955955956
+setp interpolation-hoch.in1 1488.306122
 net FC4 => interpolation-hoch.select
 net FC5 <= interpolation-hoch.out
 
