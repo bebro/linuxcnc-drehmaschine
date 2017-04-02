@@ -36,8 +36,8 @@ net PIDout <= SpindelPID.output
 
 # FU-Kennlinie einbauen
 # Tiefer Bereich
-setp FCLL.min -1
-setp FCLL.max 1
+setp FCLL.min 0
+setp FCLL.max 3.12
 net PIDout => FCLL.in
 net FC1 <= FCLL.out
 
