@@ -3,13 +3,18 @@
 #nötige Komponenten laden
 loadrt limit2 names=spindle-ramp
 addf spindle-ramp servo-thread
-loadrt pid num_chan=1 names=SpindelPID
+loadrt pid names=SpindelPID
 addf SpindelPID.do-pid-calcs servo-thread
 loadrt limit1 names=FCLL
 addf FCLL servo-thread
 loadrt scale names=FCLS,FCHS
 addf FCLS servo-thread
 addf FCHS servo-thread
+loadrt blend names=interpolation-tief,interpolation-hoch
+addf interpolation-tief servo-thread
+addf interpolation-hoch servo-thread
+loadrt sum2 names=FCSum
+addf FCSum
 
 # Spindel-Ein-Signal
 net spindle-enable <= motion.spindle-on
@@ -35,12 +40,30 @@ setp FCLL.min 0
 setp FCLL.max 1
 net PIDout => FCLL.in
 net FC1 <= FCLL.out
-setp FCLS.gain 1
+
+setp FCLS.gain 0.3
 net FC1 => FCLS.in
 net FC2 <= FCLS.out
 
+setp interpolation-tief.in1 0
+setp interpolation-tief.in2 -500
+net FC2 => interpolation-tief.select
+net FC3 <= interpolation-tief.out
 
+setp FCHS.gain 0.1
+net PIDout => FCHS.in
+net FC4 <= FCHS.out
 
+setp interpolation-hoch.in1 0
+setp interpolation-hoch.in2 1500
+net FC4 => interpolation-hoch.select
+net FC5 <= interpolation-hoch.out
+
+setp FCSum.gain0 1
+setp FCSum.gain1 1
+net FC3 => FCSum.in0
+net FC5 => FCSum.in1
+net FC6 <= FCSum.out
 
 
 # PWM ausgeben
