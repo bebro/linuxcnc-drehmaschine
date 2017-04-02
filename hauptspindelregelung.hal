@@ -3,10 +3,10 @@
 #nötige Komponenten laden
 loadrt limit2 names=spindle-ramp
 addf spindle-ramp servo-thread
-loadrt pid debug=1
-addf pid.0.do_pid_calcs servo-thread
+loadrt pid num_chan=1
+#addf pid.0.do_pid_calcs servo-thread
 loadrt limit1
-addf limit1
+addf limit1.0 servo-thread
 
 # Spindel-Ein-Signal
 net spindle-enable <= motion.spindle-on
@@ -27,10 +27,10 @@ net nist => pid.0.feedback
 
 
 # PWM ausgeben
-setp hm2_5i25.0.gpio.000.is_opendrain true #pwm out
-setp hm2_5i25.0.gpio.000.invert_output true #pwm out
-setp hm2_5i25.0.pwmgen.pwm_frequency 20 #Hz
-setp hm2_5i25.0.pwmgen.00.scale 1000 # -0 bis 1000
+#setp hm2_5i25.0.gpio.000.is_opendrain true #pwm out
+#setp hm2_5i25.0.gpio.000.invert_output true #pwm out
+#setp hm2_5i25.0.pwmgen.pwm_frequency 20 #Hz
+#setp hm2_5i25.0.pwmgen.00.scale 1000 # -0 bis 1000
 
 # Drehzahlkennlinie des Interfacemoduls
 
