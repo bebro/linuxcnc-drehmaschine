@@ -14,7 +14,7 @@ loadrt blend names=interpolation-tief,interpolation-hoch
 addf interpolation-tief servo-thread
 addf interpolation-hoch servo-thread
 loadrt sum2 names=FCSum
-addf FCSum
+addf FCSum servo-thread
 
 # Spindel-Ein-Signal
 net spindle-enable <= motion.spindle-on
