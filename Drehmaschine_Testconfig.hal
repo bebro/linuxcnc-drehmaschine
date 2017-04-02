@@ -90,9 +90,8 @@ net z-pos-limit     =>  axis.2.pos-lim-sw-in
 setp   hm2_5i25.0.pwmgen.00.output-type 1
 setp   hm2_5i25.0.pwmgen.00.scale  [SPINDLE_9]OUTPUT_SCALE
 
-
-net spindle-vel-cmd     => hm2_5i25.0.pwmgen.00.value
-net spindle-enable      => hm2_5i25.0.pwmgen.00.enable
+#net spindle-vel-cmd     => hm2_5i25.0.pwmgen.00.value
+#net spindle-enable      => hm2_5i25.0.pwmgen.00.enable
 
 # ---Encoder feedback signals/setup---
 

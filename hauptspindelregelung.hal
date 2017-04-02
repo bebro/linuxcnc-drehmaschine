@@ -15,21 +15,36 @@ addf interpolation-tief servo-thread
 addf interpolation-hoch servo-thread
 loadrt sum2 names=FCSum
 addf FCSum servo-thread
+loadrt abs names=nsollabs
+addf nsollabs servo-thread
+loadrt comp names=spindle-on
+addf spindle-on
 
 # Spindel-Ein-Signal
-net spindle-enable <= motion.spindle-on
+#net spindle-enable <= motion.spindle-on
+setp spindle-on.in0 5 # Drehzahl ab der die Spindel eingeschaltet wird
+net nsoll => spindle-on.in1
+net spindle-enable <= spindle-on.out
 
 # Rampenerzeugung aus Sollwertsprüngen
 setp spindle-ramp.maxv 100	# Einheit pro Sekunde
 net spindle-cmd <= motion.spindle-speed-out => spindle-ramp.in
-net nsoll <= spindle-ramp.out
+net nsollsigned <= spindle-ramp.out
+
+# Betrag von Drehzahlsollsignal
+net nsollsigned => nsollabs.in
+net nsoll <= nsollabs.out
+# Spindelrichtungssignal
+net spindle-dir <= nsollabs.is-negative
+#net spindle-dir <= nsollabs.is-positive
 
 #PID Regler mit Vorsteuerung (ff0)
 setp SpindelPID.Pgain 0
 setp SpindelPID.Igain 0
 setp SpindelPID.Dgain 0
 setp SpindelPID.FF0 1
-net spindle-enable => SpindelPID.enable
+#net spindle-enable => SpindelPID.enable
+setp SpindelPID.enable true
 net nsoll => SpindelPID.command
 net nist => SpindelPID.feedback
 net PIDout <= SpindelPID.output
@@ -64,14 +79,4 @@ setp FCSum.gain0 1
 setp FCSum.gain1 1
 net FC3 => FCSum.in0
 net FC5 => FCSum.in1
-net FC6 <= FCSum.out
-
-
-# PWM ausgeben
-#setp hm2_5i25.0.gpio.000.is_opendrain true #pwm out
-#setp hm2_5i25.0.gpio.000.invert_output true #pwm out
-#setp hm2_5i25.0.pwmgen.pwm_frequency 20 #Hz
-#setp hm2_5i25.0.pwmgen.00.scale 1000 # -0 bis 1000
-
-# Drehzahlkennlinie des Interfacemoduls
-
+net SpindlePwmValue <= FCSum.out
