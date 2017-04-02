@@ -1,5 +1,5 @@
 loadrt near names=sas
-addf near.0 servo-thread
+addf sas servo-thread
 
 # Spindle-At-Speed
 setp sas.scale 1.05
