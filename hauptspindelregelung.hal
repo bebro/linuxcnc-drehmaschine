@@ -27,7 +27,7 @@ net nsoll => spindle-on.in1
 net spindle-enable <= spindle-on.out
 
 # Rampenerzeugung aus Sollwertsprüngen
-setp spindle-ramp.maxv 100	# Einheit pro Sekunde
+setp spindle-ramp.maxv 500	# Einheit pro Sekunde
 net spindle-cmd <= motion.spindle-speed-out => spindle-ramp.in
 net nsollsigned <= spindle-ramp.out
 
@@ -52,27 +52,27 @@ net PIDout <= SpindelPID.output
 # FU-Kennlinie einbauen
 # Tiefer Bereich
 setp FCLL.min 0
-setp FCLL.max 100
+setp FCLL.max 2250
 net PIDout => FCLL.in
 net FC1 <= FCLL.out
 
-setp FCLS.gain 0.01
+setp FCLS.gain 0.000444444444444
 net FC1 => FCLS.in
 net FC2 <= FCLS.out
 
 setp interpolation-tief.in2 0
-setp interpolation-tief.in1 0
+setp interpolation-tief.in1 2700
 
 net FC2 => interpolation-tief.select
 net FC3 <= interpolation-tief.out
 
 # hoher Bereich
-setp FCHS.gain 0.00025
+setp FCHS.gain 0.00025641025641
 net PIDout => FCHS.in
 net FC4 <= FCHS.out
 
 setp interpolation-hoch.in2 0
-setp interpolation-hoch.in1 4000
+setp interpolation-hoch.in1 1300
 net FC4 => interpolation-hoch.select
 net FC5 <= interpolation-hoch.out
 
