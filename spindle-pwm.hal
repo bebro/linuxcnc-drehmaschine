@@ -1,0 +1,13 @@
+# ---PWM Generator signals/setup---
+
+setp   hm2_5i25.0.pwmgen.00.output-type 1
+setp   hm2_5i25.0.pwmgen.00.scale 4000 # höchster Drehzahlsollwert
+
+net SpindlePwmValue => hm2_5i25.0.pwmgen.00.value
+setp hm2_5i25.0.pwmgen.00.enable true
+
+# PWM ausgeben
+setp hm2_5i25.0.gpio.000.is_opendrain true #pwm out
+setp hm2_5i25.0.gpio.000.invert_output true #pwm out
+setp hm2_5i25.0.pwmgen.pwm_frequency 20 #Hz
+#setp hm2_5i25.0.pwmgen.00.scale 1000 # -0 bis 1000
