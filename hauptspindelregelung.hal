@@ -39,12 +39,12 @@ net spindle-dir <= nsollabs.is-negative
 #net spindle-dir <= nsollabs.is-positive
 
 #PID Regler mit Vorsteuerung (ff0)
-setp SpindelPID.Pgain 0
-setp SpindelPID.Igain 0
+setp SpindelPID.Pgain 1.2
+setp SpindelPID.Igain 2.5
 setp SpindelPID.Dgain 0
 setp SpindelPID.FF0 1
-#net spindle-enable => SpindelPID.enable
-setp SpindelPID.enable true
+net spindle-enable => SpindelPID.enable
+#setp SpindelPID.enable true
 net nsoll => SpindelPID.command
 net nist => SpindelPID.feedback
 net PIDout <= SpindelPID.output
