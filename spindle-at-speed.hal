@@ -1,6 +1,3 @@
-loadrt near names=sas
-addf sas servo-thread
-
 # Spindle-At-Speed
 setp sas.scale 1.05
 setp sas.difference 50

@@ -1,8 +1,3 @@
-loadrt lowpass names=nist-Tiefpass
-addf nist-Tiefpass servo-thread
-loadrt scale names=drehzahl-gain
-addf drehzahl-gain servo-thread
-
 # Spindelencoder einbinden
 setp    hm2_5i25.0.encoder.00.counter-mode 1
 setp    hm2_5i25.0.encoder.00.filter 1
