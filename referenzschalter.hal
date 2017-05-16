@@ -3,4 +3,4 @@
 #net x-home-sw     =>  axis.0.home-sw-in
 
 #net z-home-sw     =>  axis.2.home-sw-in
-net z-home-sw <= hm2_5i25.gpio.013.in
+net z-home-sw <= hm2_5i25.0.gpio.013.in
