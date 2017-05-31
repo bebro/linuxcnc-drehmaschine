@@ -19,8 +19,8 @@ net spindle-dir <= nsollabs.is-negative
 #net spindle-dir <= nsollabs.is-positive
 
 #PID Regler mit Vorsteuerung (ff0)
-setp SpindelPID.Pgain 1.2
-setp SpindelPID.Igain 2.5
+setp SpindelPID.Pgain 0
+setp SpindelPID.Igain 0
 setp SpindelPID.Dgain 0
 setp SpindelPID.FF0 1
 net spindle-enable => SpindelPID.enable
@@ -32,16 +32,16 @@ net PIDout <= SpindelPID.output
 # FU-Kennlinie einbauen
 # Tiefer Bereich
 setp FCLL.min 0
-setp FCLL.max 3450
+setp FCLL.max 2000
 net PIDout => FCLL.in
 net FC1 <= FCLL.out
 
-setp FCLS.gain 0.000289855072464
+setp FCLS.gain 0.0005
 net FC1 => FCLS.in
 net FC2 <= FCLS.out
 
 setp interpolation-tief.in2 0
-setp interpolation-tief.in1 -8100
+setp interpolation-tief.in1 0
 
 net FC2 => interpolation-tief.select
 net FC3 <= interpolation-tief.out
@@ -52,7 +52,7 @@ net PIDout => FCHS.in
 net FC4 <= FCHS.out
 
 setp interpolation-hoch.in2 0
-setp interpolation-hoch.in1 12000
+setp interpolation-hoch.in1 4000
 net FC4 => interpolation-hoch.select
 net FC5 <= interpolation-hoch.out
 
