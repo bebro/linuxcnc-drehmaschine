@@ -32,27 +32,27 @@ net PIDout <= SpindelPID.output
 # FU-Kennlinie einbauen
 # Tiefer Bereich
 setp FCLL.min 0
-setp FCLL.max 2000
+setp FCLL.max 2230
 net PIDout => FCLL.in
 net FC1 <= FCLL.out
 
-setp FCLS.gain 0.0005
+setp FCLS.gain 0.00044843
 net FC1 => FCLS.in
 net FC2 <= FCLS.out
 
 setp interpolation-tief.in2 0
-setp interpolation-tief.in1 0
+setp interpolation-tief.in1 -84.11214953271
 
 net FC2 => interpolation-tief.select
 net FC3 <= interpolation-tief.out
 
 # hoher Bereich
-setp FCHS.gain 0.00025
+setp FCHS.gain 0.00030303
 net PIDout => FCHS.in
 net FC4 <= FCHS.out
 
 setp interpolation-hoch.in2 0
-setp interpolation-hoch.in1 4000
+setp interpolation-hoch.in1 3084.11214953271
 net FC4 => interpolation-hoch.select
 net FC5 <= interpolation-hoch.out
 
