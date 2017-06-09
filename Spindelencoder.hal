@@ -11,7 +11,7 @@ net spindle-position <= hm2_5i25.0.encoder.00.position => motion.spindle-revs
 net spindle-index-enable <= hm2_5i25.0.encoder.00.index-enable => motion.spindle-index-enable
 
 # Spikes aus Encoder-Drehzahl entfernen
-setp nist-Tiefpass.gain 0.025
+setp nist-Tiefpass.gain 0.01
 net nfeedback => nist-Tiefpass.in
 net rps-ist <= nist-Tiefpass.out
 net rps-ist => motion.spindle-speed-in
