@@ -21,7 +21,7 @@ net spindle-dir <= nsollabs.is-negative
 #PID Regler mit Vorsteuerung (ff0)
 setp SpindelPID.Pgain 5
 setp SpindelPID.Igain 10
-setp SpindelPID.Dgain 0.5
+setp SpindelPID.Dgain 0.25
 setp SpindelPID.FF0 1
 net spindle-enable => SpindelPID.enable
 #setp SpindelPID.enable true
