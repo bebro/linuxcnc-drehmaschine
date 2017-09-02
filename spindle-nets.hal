@@ -10,4 +10,4 @@ net spindle-dir => hm2_5i25.0.gpio.003.out
 setp hm2_5i25.0.gpio.005.is_output true 
 setp hm2_5i25.0.gpio.005.is_opendrain true 
 setp hm2_5i25.0.gpio.005.invert_output true
-#net spindle-enable => hm2_5i25.0.gpio.005.out
+net spindle-enable => hm2_5i25.0.gpio.005.out
