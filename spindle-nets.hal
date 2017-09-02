@@ -1,0 +1,13 @@
+# Link Spindle Signals to 5i25
+
+# Spindle CW/CCW
+setp hm2_5i25.0.gpio.003.is_output true 
+setp hm2_5i25.0.gpio.003.is_opendrain true 
+setp hm2_5i25.0.gpio.003.invert_output true
+net spindle-dir => hm2_5i25.0.gpio.003.out
+
+# Spindle Enable
+setp hm2_5i25.0.gpio.005.is_output true 
+setp hm2_5i25.0.gpio.005.is_opendrain true 
+setp hm2_5i25.0.gpio.005.invert_output true
+#net spindle-enable => hm2_5i25.0.gpio.005.out
