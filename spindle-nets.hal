@@ -3,7 +3,7 @@
 # Spindle CW/CCW
 setp hm2_5i25.0.gpio.003.is_output true 
 setp hm2_5i25.0.gpio.003.is_opendrain true 
-setp hm2_5i25.0.gpio.003.invert_output true
+setp hm2_5i25.0.gpio.003.invert_output false
 net spindle-dir => hm2_5i25.0.gpio.003.out
 
 # Spindle Enable
