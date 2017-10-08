@@ -20,3 +20,8 @@ net rps-ist => motion.spindle-speed-in
 setp drehzahl-gain.gain 60
 net rps-ist => drehzahl-gain.in
 net nist <= drehzahl-gain.out
+
+# Neuer Ansatz um Spikes aus Drehzahl zu entfernen
+setp despike.0.maximum 66.0
+net nfeedback => despike.0.in
+net ndespiked <= despike.0.out

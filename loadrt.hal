@@ -31,3 +31,6 @@ addf nist-Tiefpass servo-thread
 
 loadrt near names=sas
 addf sas servo-thread
+
+loadrt despike
+addf despike.0 servo-thread
