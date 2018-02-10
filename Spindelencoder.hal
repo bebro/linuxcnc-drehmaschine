@@ -6,22 +6,20 @@ setp    hm2_5i25.0.encoder.00.index-mask 0
 setp    hm2_5i25.0.encoder.00.index-mask-invert 0
 #setp    hm2_5i25.0.encoder.00.scale 0.8315
 setp    hm2_5i25.0.encoder.00.scale 50.0
-net nfeedback <=  hm2_5i25.0.encoder.00.velocity
 net spindle-position <= hm2_5i25.0.encoder.00.position => motion.spindle-revs
 net spindle-index-enable <= hm2_5i25.0.encoder.00.index-enable => motion.spindle-index-enable
 
-# Spikes aus Encoder-Drehzahl entfernen
-setp nist-Tiefpass.gain 0.005 # vorher: 0.01
-net nfeedback => nist-Tiefpass.in
-net rps-ist <= nist-Tiefpass.out
+# Encoder-Position glätten mit Tiefpass
+setp Spindel-Tiefpass.gain 0.005 # vorher: 0.01
+net spindle-position => Spindel-Tiefpass.in
+net spindle-pos-filtered <= Spindel-Tiefpass.out
+
+# Encoder-Position ableiten
+net spindle-pos-filtered => SpindelAbleitung.in
+net rps-ist <= SpindelAbleitung.out
 net rps-ist => motion.spindle-speed-in
 
 # Istdrehzahl von rps zu rpm skalieren
 setp drehzahl-gain.gain 60
 net rps-ist => drehzahl-gain.in
 net nist <= drehzahl-gain.out
-
-# Neuer Ansatz um Spikes aus Drehzahl zu entfernen
-setp despike.0.maximum 66.0
-net nfeedback => despike.0.in
-net ndespiked <= despike.0.out

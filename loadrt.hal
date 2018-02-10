@@ -26,11 +26,11 @@ addf nsollabs servo-thread
 loadrt comp names=spindle-on
 addf spindle-on servo-thread
 
-loadrt lowpass names=nist-Tiefpass
-addf nist-Tiefpass servo-thread
+loadrt lowpass names=Spindel-Tiefpass
+addf Spindel-Tiefpass servo-thread
 
 loadrt near names=sas
 addf sas servo-thread
 
-loadrt despike
-addf despike.0 servo-thread
+loadrt ddt names=SpindelAbleitung
+addf SpindelAbleitung servo-thread
