@@ -34,3 +34,6 @@ addf sas servo-thread
 
 loadrt ddt names=SpindelAbleitung
 addf SpindelAbleitung servo-thread
+
+# Laden von MB2HAL für den Werkzeugrevolver:
+loadusr -Wn Werkzeugrevolver mb2hal config=mb2hal_werkzeugrevolver.ini
